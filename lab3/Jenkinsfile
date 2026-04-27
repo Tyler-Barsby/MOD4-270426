@@ -1,29 +1,28 @@
 pipeline {
     agent any
+
+    parameters {
+        base64File(name: 'UPLOAD', description: 'Upload a file to process')
+    }
+
     stages {
-        stage('Build') {
+        stage('Receive File') {
             steps {
-                sh "echo 'Building...'"
-                sh "touch app.txt"
-                sh "ls -la"
+                withFileParameter('UPLOAD') {
+                    sh 'cp UPLOAD received_file.txt'
+                }
             }
         }
-        stage('Test') {
+
+        stage('Process File') {
             steps {
-                sh "echo 'Testing...'"
-                sh "pwd"
+                sh 'python3 script.py received_file.txt processed_file.txt'
             }
         }
-        stage('Approval') {
+
+        stage('Archive') {
             steps {
-                input message: 'Ready to deploy?', ok: 'Yes, deploy it!'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh "echo 'Deploying...'"
-                sh "mv app.txt deployed_app.txt"
-                sh "ls -la"
+                archiveArtifacts artifacts: 'processed_file.txt'
             }
         }
     }
