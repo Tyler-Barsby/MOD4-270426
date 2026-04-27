@@ -9,7 +9,7 @@ pipeline {
         stage('Receive File') {
             steps {
                 withFileParameter('UPLOAD') {
-                    sh 'cp UPLOAD received_file.txt'
+                    sh 'cp $UPLOAD received_file.txt'
                 }
             }
         }

@@ -1,0 +1,18 @@
+Jenkins Pipeline File Upload Test
+===================================
+Name: Tyler Barsby
+Date: 27 April 2026
+Module: DOL4.4 DevOps Tooling
+
+This is a test file for the Jenkins file upload pipeline.
+It contains multiple lines so we can test line counting.
+It also contains multiple words so we can test word counting.
+
+Some data to process:
+- Item 1: Docker
+- Item 2: Jenkins
+- Item 3: nginx
+- Item 4: EC2
+- Item 5: Python
+
+End of test file.
