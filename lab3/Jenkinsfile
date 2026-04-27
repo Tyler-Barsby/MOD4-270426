@@ -1,1 +1,30 @@
-
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh "echo 'Building...'"
+                sh "touch app.txt"
+                sh "ls -la"
+            }
+        }
+        stage('Test') {
+            steps {
+                sh "echo 'Testing...'"
+                sh "pwd"
+            }
+        }
+        stage('Approval') {
+            steps {
+                input message: 'Ready to deploy?', ok: 'Yes, deploy it!'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh "echo 'Deploying...'"
+                sh "mv app.txt deployed_app.txt"
+                sh "ls -la"
+            }
+        }
+    }
+}
