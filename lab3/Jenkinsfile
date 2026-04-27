@@ -19,6 +19,13 @@ pipeline {
                 sh 'python3 script.py received_file.txt processed_file.txt'
             }
         }
+        stage('Debug') {
+            steps {
+                sh 'pwd'
+                sh 'ls -la'
+                sh 'find . -name "script.py"'
+            }
+        } 
 
         stage('Archive') {
             steps {
