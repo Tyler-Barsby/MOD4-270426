@@ -11,21 +11,16 @@ pipeline {
                 withFileParameter('UPLOAD') {
                     sh 'cp $UPLOAD received_file.txt'
                 }
+                sh 'ls -la'
+                sh 'find . -name "*.py"'
             }
         }
 
         stage('Process File') {
             steps {
-                sh 'python3 script.py received_file.txt processed_file.txt'
+                sh 'python3 lab3/script.py received_file.txt processed_file.txt'
             }
         }
-        stage('Debug') {
-            steps {
-                sh 'pwd'
-                sh 'ls -la'
-                sh 'find . -name "script.py"'
-            }
-        } 
 
         stage('Archive') {
             steps {
