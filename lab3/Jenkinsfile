@@ -9,22 +9,20 @@ pipeline {
         stage('Receive File') {
             steps {
                 withFileParameter('UPLOAD') {
-                    sh 'cp $UPLOAD received_file.txt'
+                    sh 'cp $UPLOAD received_file'
                 }
-                sh 'ls -la'
-                sh 'find . -name "*.py"'
             }
         }
 
-        stage('Process File') {
+        stage('Detect & Process') {
             steps {
-                sh 'python3 lab3/script.py received_file.txt processed_file.txt'
+                sh 'python3 lab3/router.py received_file'
             }
         }
 
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: 'processed_file.txt'
+                archiveArtifacts artifacts: 'processed_file.*', allowEmptyArchive: true
             }
         }
     }
